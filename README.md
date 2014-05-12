@@ -1,4 +1,4 @@
-mabs
+`mabs`
 ====
 
 Multi-Armed Bandit Simulations
