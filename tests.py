@@ -19,7 +19,6 @@ def get_set():
     that perform better than those initially available.
 
     """
-
     original = [Asset('A', .03), Asset('B', .045), Asset('C', .067)]
 
     return AssetSet({
@@ -114,6 +113,7 @@ def rho_func(aset_func, cycles, pulls, minimum):
         """
         Reduces the probability at which the asset with the largest width
         is chosen given the width.
+
         """
         width = max([_.width for _ in choices])
         if width > .05:
@@ -155,9 +155,16 @@ def runtests(*aset_funcs, **kwargs):
     from `aset_funcs`.
 
     Args:
-    - aset_funcs a list of callables that will
+    - aset_funcs a list of callables that will each return a new AssetSet
+      instance for each cycle, for each simulation.
 
-    Returns a Pandas DataFrame object with the results.
+    Kwargs:
+    - cycles: the number of cycles per algorithm simulation function to run.
+    - pulls: the number of offers per each cycle.
+    - minimum: the each asset must reach this minimum number of offers
+               before the algorithm starts.
+
+    Returns a Pandas DataFrame with the results.
 
     """
     cycles = kwargs.pop('cycles', 100)

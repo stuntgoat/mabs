@@ -80,24 +80,6 @@ class Selector(object):
     # Select an asset at random.
     RANDOM = -1
 
-    @property
-    def name(self):
-        "Return a readable name of the selection method."
-        if self.rho == self.USE_RHO_FUNC:
-            return "Rho Function"
-        if self.rho == self.RANDOM:
-            return "Random"
-        if self.rho == self.ONLY_BEST:
-            return "Best Converting"
-        if self.rho == self.USE_SOFT_MAX:
-            return "Softmax"
-        if self.rho == self.USE_SOFT_MAX_2:
-            return "Softmax 2"
-        if 0 <= self.rho <= 1:
-            return "Rho %s" % self.rho
-
-        return "Rho %s" % self.rho
-
     def __init__(self, rho, start):
         """
         Args:
@@ -123,6 +105,24 @@ class Selector(object):
         # Used to hold an optional function that determines rho.
         # This function expects an AssetSet instance as an only argument.
         self.rhof = lambda x: self.rho
+
+    @property
+    def name(self):
+        "Return a readable name of the selection method."
+        if self.rho == self.USE_RHO_FUNC:
+            return "Rho Function"
+        if self.rho == self.RANDOM:
+            return "Random"
+        if self.rho == self.ONLY_BEST:
+            return "Best Converting"
+        if self.rho == self.USE_SOFT_MAX:
+            return "Softmax"
+        if self.rho == self.USE_SOFT_MAX_2:
+            return "Softmax 2"
+        if 0 <= self.rho <= 1:
+            return "Rho %s" % self.rho
+
+        return "Rho %s" % self.rho
 
     def rho_func(self, assets):
         return self.rhof(assets)
